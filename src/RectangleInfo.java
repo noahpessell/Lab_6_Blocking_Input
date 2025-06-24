@@ -4,38 +4,51 @@ public class RectangleInfo
     public static void main(String[] args)
     {
         Scanner in = new Scanner(System.in);
-        double itemPrice = 0; //listing out variables
-        double shipCost = 0;
-        double totalCost = 0;
+        double rectangleWidth = 0.0; //listing out variables
+        double rectangleHeight = 0.0;
+        double rectanglePerimeter = 0.0;
+        double rectangleArea = 0.0;
+        double rectangleDiagonal = 0.0;
         String trash = ""; //trash is for invalid input
-        System.out.print("Enter your item price: "); //OUTPUT
-        if(in.hasNextDouble()) //checking if input is a double
+        boolean done = false;
+        do
         {
-            itemPrice = in.nextDouble(); //input, set to variable
-            in.nextLine(); //clear input buffer
-            if(itemPrice >= 100) //shipping cost is 0 if item is more or equal to 100
+            System.out.print("Enter the rectangle width: ");
+            if(in.hasNextDouble()) // OK safe to read double
             {
-                shipCost = 0;
-                System.out.println("There is no shipping cost.");
-                totalCost = itemPrice + shipCost;
-                System.out.printf("Your total cost is: $" + totalCost);
+                rectangleWidth = in.nextDouble();
+                in.nextLine(); // clears the newline from the buffer
+                if (rectangleWidth > 0.0) {
+                    do {
+                        System.out.print("Enter the rectangle height: ");
+                        if (in.hasNextDouble()) {
+                            rectangleHeight = in.nextDouble();
+                            in.nextLine();
+                            if (rectangleHeight > 0.0) {
+                                done = true; // we got a valid number so we can end the loop
+                            } else {
+                            System.out.println("You have to enter a valid rectangle height not " + rectangleHeight);
+                            }
+                        } else {
+                            trash = in.nextLine();
+                            System.out.println("You have to enter a valid number value for rectangle height not " + trash);
+                         }
+                    }while(!done);
+                } else {
+                    System.out.println("You have to enter a valid rectangle width not " + rectangleWidth);
+                }
             }
-            else if(itemPrice < 100 && itemPrice >= 0) //shipping cost is 2% of item price if item is less than $100 and not negative
+            else
             {
-                shipCost = itemPrice * .02;
-                System.out.printf("Your shipping cost is: $ %.2f" , shipCost);
-                totalCost = itemPrice + shipCost;
-                System.out.printf("%n" + "Your total cost is: $ %.2f" , totalCost); //%n is added to make a new line with SOUTprintf
+              trash = in.nextLine();
+              System.out.println("You have to enter a valid number value for rectangle width not " + trash);
             }
-            else //if item price input is negative, it is an invalid number
-            {
-                System.out.println("Your input " + itemPrice + " is invalid. Please try again.");
-            }
-        }
-        else //if item price input was never a double, it is an invalid number
-        {
-            trash = in.nextLine();
-            System.out.println("Your input " + trash + " is invalid. Please try again.");
-        }
+        }while(!done);
+        rectanglePerimeter = (2*(rectangleWidth + rectangleHeight));
+        rectangleArea = (rectangleWidth * rectangleHeight);
+        rectangleDiagonal = Math.hypot(rectangleWidth, rectangleHeight);
+        System.out.printf("The perimeter of the rectangle is: %.2f%n", rectanglePerimeter);
+        System.out.printf("The area of the rectangle is: %.2f%n", rectangleArea);
+        System.out.printf("The length of the diagonal of the rectangle is: %.2f%n", rectangleDiagonal);
     }
 }
