@@ -3,25 +3,25 @@ public class CtoFConverter
 {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        int degreesCelsius = 0;
-        int degreesFahrenheit = 0;
+        double degreesCelsius = 0.0;
+        double degreesFahrenheit = 0.0;
         String trash = ""; // use for bad input which will read as a String
         boolean done = false;
         do {
             System.out.print("Enter your degrees Celsius to be converted into Fahrenheit: "); //OUTPUT
-            if (in.hasNextInt()) // OK safe to read in an int
+            if (in.hasNextDouble()) // OK safe to read in an double
             {
-                degreesCelsius = in.nextInt();
+                degreesCelsius = in.nextDouble();
                 in.nextLine(); //clear input buffer
                 done = true; // we got a valid number so we can end the loop
-            } else {
-                trash = in.nextLine();
-                System.out.println("\n" + trash + " is not a degree of Celsius");
-                System.out.println("You have to enter a valid amount!");
             }
-        }
-            while (!done) ;
+            else
+            {
+                trash = in.nextLine();
+                System.out.println(trash + " is not a valid degree of Celsius, please try again.");
+            }
+        }while(!done);
             degreesFahrenheit = (((degreesCelsius * 9)/5)+32);
-            System.out.println(+ degreesCelsius + " degrees converted to Fahrenheit is: " + degreesFahrenheit + " degrees");
+            System.out.printf("%.2f degrees Celsius converted to Fahrenheit is: %.2f degrees", degreesCelsius, degreesFahrenheit);
     }
 }
