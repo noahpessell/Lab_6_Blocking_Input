@@ -9,7 +9,7 @@ public class CtoFConverter
         boolean done = false;
         do {
             System.out.print("Enter your degrees Celsius to be converted into Fahrenheit: "); //OUTPUT
-            if (in.hasNextDouble()) // OK safe to read in an double
+            if (in.hasNextDouble()) // OK safe to read in a double
             {
                 degreesCelsius = in.nextDouble();
                 in.nextLine(); //clear input buffer
