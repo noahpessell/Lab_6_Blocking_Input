@@ -2,76 +2,76 @@ import java.util.Scanner;
 public class FuelCosts {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        double gasGallons = 0.00;
+        double gasCapacity = 0.00;
         double milesPerGallon = 0.00;
-        double gallonGasPrice = 0.00;
-        String continueYN = "";
+        double pricePerGallon = 0.00;
+        double costPerHundredMiles = 0.00;
+        double fullTankDistance = 0.00;
+        String trash = "";
         boolean done = false;
         do {
             System.out.print("Enter the number of gallons of gas that can go in your car's gas tank: "); //OUTPUT
             if (in.hasNextDouble()) // OK safe to read in a double
             {
-                gasGallons = in.nextDouble();
+                gasCapacity = in.nextDouble();
                 in.nextLine(); //clear input buffer
-                if (gasGallons < 0)
-                {
-                    System.out.println(+gasGallons + " is an invalid number of gallons. Try again? [YN] ");
-                    continueYN = in.nextLine();
-                    if (continueYN.equalsIgnoreCase("Y")) ;
-                    {
-                        done = true;
-                    }
+                if (gasCapacity <= 0.0) {
+                    System.out.println("Enter a valid number of gallons not " + gasCapacity);
                 }
-                else
-                {
-                    System.out.println("Continue [YN]: ");
-                    continueYN = in.nextLine();
-                    if (continueYN.equalsIgnoreCase("Y"))
-                    {
-                        done = true;
-                    }
-                    else
-                        {
-                            System.exit(0);
-                        }
+                else {
+                    done = true;
                 }
             }
-        }
-        while (!done);
+            else
+            {
+                trash = in.nextLine();
+                System.out.println("You have to enter a valid number not " + trash);
+            }
+        }while (!done);
+        done = false;
         do {
             System.out.print("Enter how many miles per gallon your car can travel: "); //OUTPUT
             if (in.hasNextDouble()) // OK safe to read in an int
             {
                 milesPerGallon = in.nextDouble();
                 in.nextLine(); //clear input buffer
-                System.out.println("Do you want to continue? [YN]: ");
-                continueYN = in.nextLine();
-                if (continueYN.equalsIgnoreCase("Y")) {
+                if (milesPerGallon <= 0.0) {
+                    System.out.println("Enter a valid number of miles not " + milesPerGallon);
+                } else {
                     done = true;
                 }
-                done = true; // we got a valid number so we can end the loop
-                if (continueYN.equalsIgnoreCase("Y")) {
-                    done = true;
-                }
-            } else {
-                System.out.println("\n You have ended the program!");
             }
-        }
-        while (!done);
+            else
+            {
+                trash = in.nextLine();
+                System.out.println("You have to enter a valid number not " + trash);
+            }
+        }while(!done);
+        done = false;
         do {
             System.out.print("Enter the price of gas per gallon: "); //OUTPUT
             if (in.hasNextDouble()) // OK safe to read in an int
             {
-                gallonGasPrice = in.nextDouble();
+                pricePerGallon = in.nextDouble();
                 in.nextLine(); //clear input buffer
-                done = true; // we got a valid number so we can end the loop
-                if (continueYN.equalsIgnoreCase("Y")) {
+                if (pricePerGallon <= 0.0)
+                {
+                    System.out.println("Enter a valid price for a gallon of gas not " + pricePerGallon);
+                }
+                else
+                {
                     done = true;
                 }
-            } else {
-                System.out.println("\n You have ended the program!");
             }
-        }
-        while (!done);
+            else
+            {
+                trash = in.nextLine();
+                System.out.println("You have to enter a valid number not " + trash);
+            }
+        }while (!done);
+        costPerHundredMiles = (pricePerGallon * (100 / milesPerGallon));
+        fullTankDistance = (milesPerGallon * gasCapacity);
+        System.out.printf("The cost to drive 100 miles is $%.2f.%n", costPerHundredMiles);
+        System.out.printf("Your car can drive %.2f miles with a full tank of gas.", fullTankDistance);
     }
 }
